@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test-04</title>
+</head>
+<body>
+    <h2>test 04 - force</h2>
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script>
+        let width = 500, height = 500;
+        const svg = d3.select('body').append('svg')
+            .attr('width', width).attr('height', height)
+            .style('border-radius', '5px')
+            .style('box-shadow', '0 0 10px 0 #666');
+        const data = {
+            nodes: [
+                {id: 103, class: 'c1'},
+                {id: 104, class: 'c2'},
+                {id: 105, class: 'c3'},
+                {id: 106, class: 'c1'},
+                {id: 107, class: 'c2'},
+            ],
+            links: [
+                {source: 103, target: 104, index: 1},
+                {source: 103, target: 105, index: 1},
+                {source: 103, target: 106, index: 1},
+                {source: 104, target: 107, index: 1},
+                {source: 104, target: 105, index: 1},
+                {source: 105, target: 107, index: 1},
+            ]
+        };
+
+        const simulation = d3.forceSimulation(data.nodes)       // 先绑定节点
+            .force('charge', d3.forceManyBody())
+            .force('link', d3.forceLink(data.links).id(d=>{console.log(d);return d.id}))
+            .force('center', d3.forceCenter(width / 2, height / 2))
+
+        let node = svg.append('g')
+            .attr('class', 'nodes')
+            .selectAll('circle')
+            .data(data.nodes).enter()
+            .append('circle')
+            .attr('r', 10);
+
+        console.log(node);
+
+    </script>
+</body>
+</html>
