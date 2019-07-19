@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test-01</title>
+</head>
+<body>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        let links, nodes;
+        let width = 500,
+            height = 500;
+        d3.json("https://gist.githubusercontent.com/mbostock/4062045/raw/5916d145c8c048a6e3086915a6be464467391c62/miserables.json").then(v=>{
+            links = v.links.map(d => Object.create(d));
+            nodes = v.nodes.map(d => Object.create(d));
+        })
+        
+        const simulation = d3.forceSimulation(nodes)
+            .force('link', d3.forceLink(links).id(d=>d.id))
+            .force('charge', d3.forceManyBody())
+            .force('center', d3.forceCenter(width/2, height/2))
+
+        // root
+        const svg = d3.select('body').append('svg')
+            .attr('height', height)
+            .attr('width', width)
+            .style('border-radius', '5px')
+            .style('box-shadow', '0 0 10px 0 #666');
+
+        // node
+        const node = svg.append('g')
+            .attr('stoke', '#666')
+            .attr('stroke-width', 1.5)
+            .selectAll('circle')
+            .data(nodes)
+            .join('circle')
+            .attr('r', 5)
+            .attr('fill', color)
+            .call(drag(simulation));
+
+        // links
+        const link = svg.append('g')
+            .attr('stroke', '#666')
+            .attr('stroke-opacity', 0.6);
+
+    </script>
+</body>
+</html>
