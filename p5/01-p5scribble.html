@@ -28,6 +28,7 @@
             createCanvas(window.innerWidth, window.innerHeight);
 
             fill(0);
+            strokeWeight(2);
             scribble.bowing = 10;
             scribble.roughness = 2;
             scribble.maxOffset = 1;
@@ -36,8 +37,11 @@
             // 自定义随机种子
             randomSeed(38572935);
 
-            // 画线
+            // 直线
             scribble.scribbleLine(50, 40, 100, 100);
+
+            // Bezier曲线
+            scribble.scribbleCurve(50, 200, 160, 300, 370, 400, 10, 500);
 
             // 矩形
             scribble.scribbleRect(50, 150, 50, 50, 1000);
@@ -50,7 +54,7 @@
             scribble.scribbleFilling(
                 [500, 500, 700, 700, 600],
                 [100, 300, 300, 100, 150],
-                1, 2
+                3, -30
             );
             noLoop();
         }
