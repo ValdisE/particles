@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>p5-scribble</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            overflow-y: hidden
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://cdn.bootcss.com/p5.js/0.9.0/p5.min.js"></script>
+    <script src="../js/p5.scribble.js"></script>
+    <script>
+        const scribble = new Scribble();
+
+        function setup() {
+            createCanvas(window.innerWidth, window.innerHeight);
+
+            fill(0);
+            scribble.bowing = 10;
+            scribble.roughness = 2;
+            scribble.maxOffset = 1;
+            scribble.numEllipseSteps = 10;
+
+            // 自定义随机种子
+            randomSeed(38572935);
+
+            // 画线
+            scribble.scribbleLine(50, 40, 100, 100);
+
+            // 矩形
+            scribble.scribbleRect(50, 150, 50, 50, 1000);
+
+            // 椭圆
+            scribble.scribbleEllipse(200, 200, 50, 100);
+
+            // 填充多边形
+            stroke(0, 128, 128);
+            scribble.scribbleFilling(
+                [500, 500, 700, 700, 600],
+                [100, 300, 300, 100, 150],
+                1, 2
+            );
+            noLoop();
+        }
+
+        function draw() {}
+    </script>
+</body>
+
+</html>
