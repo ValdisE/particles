@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gio | HelloWorld</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #globeArea {
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="globeArea"></div>
+    <script src="https://cdn.bootcss.com/three.js/r83/three.min.js"></script>
+    <script src="./js/gio.min.js"></script>
+    <script>
+        const controller = new GIO.Controller(document.getElementById('globeArea'));
+        // controller.addData(data);
+        controller.init();
+    </script>
+
+</body>
+
+</html>
